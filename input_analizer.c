@@ -32,11 +32,30 @@ char	*strcreator(const char *input, char *set)
 	return (str);
 }
 
-void	handle_width(int len)
+void	handle_width(int len, char c)
 {
 	while (len > 0)
 	{
-		write (1, " ", 1);
+		write (1, &c, 1);
 		len--;
 	}
 }
+
+int	numlen(int number)
+{
+	int	len;
+
+	len = 0;
+	if (number < 0)
+	{
+		len++;
+		number *= -1;
+	}
+	while (number > 0)
+	{
+		len++;
+		number /= 10;
+	}
+	return (len);
+}
+

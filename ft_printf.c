@@ -5,9 +5,9 @@ void	sorter(char *c, char *flags, char *width, char *precision, va_list *argumen
 {
 	if (*c == 's')
 		print_string(flags, width, precision, arguments);
-	/*if (*c == 'd' || *c == 'i')
-		print_numbers(c, flags, width, precision, arguments);
-	if (*c == 'u')
+	if (*c == 'd' || *c == 'i')
+		print_numbers(flags, width, precision, arguments);
+	/*if (*c == 'u')
 		print_numbers(c, flags, width, precision, arguments);
 	if (*c == 'x' || *c == 'X')
 		print_esanum(c, flags, widht, precision, arguments);
@@ -68,6 +68,6 @@ int	ft_printf(const char *input, ...)
 
 int main()
 {
-	printf("orig :%2147.s.\n","ciao");
-	ft_printf("test :%2147.s.", "ciao");
+	printf("orig :%+-13 d.\n",13);
+	ft_printf("test :%+-13 d.", 13);
 }

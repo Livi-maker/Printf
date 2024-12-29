@@ -11,5 +11,8 @@ int		isthere(char input, char *set);
 char	*strcreator(const char *input, char *set);
 void	print_all(const char *input, va_list *arg);
 void	print_string(char *flags, char *width, char *precision, va_list *arg);
-void	handle_width(int len);
+void	handle_width(int len, char c);
+void	print_numbers(char *flags, char *width, char *precision, va_list *arguments);
+int		numlen(int number);
+
 #endif
