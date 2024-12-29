@@ -1,6 +1,6 @@
-NAME = printf.a
+NAME = printf
 
-MY_SOURCES = *.c libft/*.c
+MY_SOURCES = $(wildcard *.c) $(wildcard libft/*.c)
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
@@ -11,12 +11,16 @@ CGFLAGS += -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(MY_OBJECTS)
-	ar rcs $(NAME) $(MY_OBJECTS)
+	$(CC) $(CGFLAGS) -o $@ $^
+	#ar rcs $(NAME) $(MY_OBJECTS)
+
+%.o: %.c
+	$(CC) $(CGFLAGS) -c $< -o $@
 
 clean: 
 	rm -f $(MY_OBJECTS)
 
 fclean:
-	rm -f $(NAME) $(MY_SOURCES)
+	rm -f $(NAME) $(MY_OBJECTS)
 
 re: flean $(NAME)
