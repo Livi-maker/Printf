@@ -23,4 +23,4 @@ clean:
 fclean:
 	rm -f $(NAME) $(MY_OBJECTS)
 
-re: flean $(NAME)
+re: fclean $(NAME)

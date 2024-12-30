@@ -1,12 +1,15 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-void	sorter(char *c, char *flags, char *width, char *precision, va_list *arguments)
+void	sorter(va_list *arguments, t_arg *arg)
 {
-	if (*c == 's')
-		print_string(flags, width, precision, arguments);
-	if (*c == 'd' || *c == 'i')
-		print_numbers(flags, width, precision, arguments);
+	char	specifier;
+
+	specifier = *(arg -> c);
+	if (specifier == 's')
+		print_string(arguments, arg);
+	if (specifier == 'd' || specifier == 'i')
+		print_numbers(arguments, arg);
 	/*if (*c == 'u')
 		print_numbers(c, flags, width, precision, arguments);
 	if (*c == 'x' || *c == 'X')
@@ -15,32 +18,36 @@ void	sorter(char *c, char *flags, char *width, char *precision, va_list *argumen
 		print_pointer(c, flags, width, precision, arguments);
 	if (*c == 'c')
 		print_char(c, flags, width, precision, arguments);*/
-	if (*c == '%')
+	if (*(arg -> c) == '%')
 	{
 		write(1, "%", 1);
 	}
 }
 
-void	flag_analizer(const char *input, va_list *arguments)
+void	flag_analizer(const char *input, va_list *arguments, t_arg *arg)
 {
-	char	*flags;
-	char	*width;
-	char	*precision;
-	char	*c;
+	int		len;
 
-	flags = strcreator(input, "-+ #0");
-	input += ft_strlen(flags);
-	width = strcreator(input, "*1234567890");
-	input += ft_strlen(width);
-	precision = strcreator(input, "-.*1234567890");
-	input += ft_strlen(precision);
-	c = strcreator(input, "cspdiuxX");
-	input += ft_strlen(c);
-	sorter(c, flags, width, precision, arguments);
-	print_all(input, arguments);
+	arg -> flags = strcreator(input, "-+ #0");
+	len = ft_strlen(arg -> flags);
+	arg -> width = strcreator(input + len, "*1234567890");
+	len += ft_strlen(arg -> width);
+	if (*(input + len) == '.')
+		len++;
+	arg -> precision = strcreator(input + len, "-*1234567890");
+	len += ft_strlen(arg -> precision);
+	arg -> c = strcreator(input + len, "cspdiuxX");
+	if (*(arg -> c) == '\0')
+	{
+		ft_putstr_fd(input - 1, 1);
+		return ;
+	}
+	input += len + ft_strlen(arg -> c);
+	sorter(arguments, arg);
+	print_all(input, arguments, arg);
 }
 
-void	print_all(const char *input, va_list *arguments)
+void	print_all(const char *input, va_list *arguments, t_arg *arg)
 {
 	while (*input != '%' && *input)
 	{
@@ -50,24 +57,24 @@ void	print_all(const char *input, va_list *arguments)
 	if (*input == '%')
 	{
 		input++;
-		flag_analizer(input, arguments);
+		flag_analizer(input, arguments, arg);
 	}
 }
 
 int	ft_printf(const char *input, ...)
 {
 	va_list	arguments;
-	va_list copy;
+	t_arg	*arg;
 
+	arg = malloc(sizeof(t_arg));
 	va_start(arguments, input);
-	va_copy(copy, arguments);
-	print_all(input, &copy);
+	print_all(input, &arguments, arg);
 	return (0);
 }
 
 
 int main()
 {
-	printf("orig :%+-13 d.\n",13);
-	ft_printf("test :%+-13 d.", 13);
+	printf("orig :%12.2s.\n","ciao");
+	ft_printf("test :%12.2s.","ciao");
 }

@@ -59,3 +59,18 @@ int	numlen(int number)
 	return (len);
 }
 
+int	findmaxmin(int i1, int i2, char indicator)
+{
+	if (indicator == 'm')
+	{
+		if (i1 < i2)
+			return (i1);
+		return (i2);
+	}
+	if (indicator == 'M')
+	{
+		if (i1 > i2)
+			return (i1);
+	}
+	return (i2);
+}
