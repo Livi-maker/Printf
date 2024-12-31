@@ -19,7 +19,7 @@ typedef struct	s_arg
 
 int		isthere(char input, char *set);
 char	*strcreator(const char *input, char *set);
-int		print_all(const char *input, va_list *arguments, t_arg *arg);
+void	print_all(const char *input, va_list *arguments, t_arg *arg);
 void	print_string(va_list *arguments, t_arg *arg);
 void	handle_width(int len, char c);
 void	print_numbers(va_list *arguments, t_arg *arg);

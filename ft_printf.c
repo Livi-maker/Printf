@@ -50,16 +50,13 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	input += len + ft_strlen(arg -> c);
 	sorter(arguments, arg);
 	temp = arg;
-	arg = malloc(sizeof(t_arg);
+	arg = malloc(sizeof(t_arg));
 	free_arg(temp);
 	print_all(input, arguments, arg);
 }
 
 void	print_all(const char *input, va_list *arguments, t_arg *arg)
 {
-	int	printed_char;
-
-	printed_char = 0;
 	while (*input != '%' && *input)
 	{
 		write(1, input, 1);
@@ -79,11 +76,11 @@ int	ft_printf(const char *input, ...)
 	t_arg	*arg;
 	int		printed_char;
 
-	arg = malloc(sizeof(t_arg);
+	arg = malloc(sizeof(t_arg));
 	va_start(arguments, input);
 	arg -> printed = 0;
 	print_all(input, &arguments, arg);
-	printed_char = arg -> printed
+	printed_char = arg -> printed;
 	free (arg);
 	va_end(arguments);
 	return (printed_char);
