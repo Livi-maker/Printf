@@ -6,7 +6,7 @@ MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CC = gcc
 
-#CGFLAGS += -Wall -Wextra -Werror
+CGFLAGS += -Wall -Wextra -Werror
 
 all: $(NAME)
 

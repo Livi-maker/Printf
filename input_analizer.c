@@ -41,20 +41,24 @@ void	handle_width(int len, char c)
 	}
 }
 
-int	numlen(int number)
+int	numlen(long long number, char *c, int d)
 {
 	int	len;
+	long long n;
 
 	len = 0;
-	if (number < 0)
+	n = number;
+	if (*c == 'u' || *c == 'x' || *c == 'X' || *c == 'p')
+		n = (unsigned long) number;
+	if (n < 0)
 	{
 		len++;
-		number *= -1;
+		n *= -1;
 	}
-	while (number > 0)
+	while (n > 0)
 	{
 		len++;
-		number /= 10;
+		n /= d;
 	}
 	return (len);
 }

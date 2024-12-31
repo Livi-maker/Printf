@@ -22,7 +22,11 @@ void	print_all(const char *input, va_list *arguments, t_arg *arg);
 void	print_string(va_list *arguments, t_arg *arg);
 void	handle_width(int len, char c);
 void	print_numbers(va_list *arguments, t_arg *arg);
-int		numlen(int number);
+int		numlen(long long number, char *c, int d);
 int		findmaxmin(int i1, int i2, char indicator);
-
+void	printunsigned(unsigned int number);
+void	print_char(va_list *arguments, t_arg *arg);
+void	putnbr_base(long unsigned number, char *base);
+void	print_esanum(va_list *arguments, t_arg *arg);
+void	free_arg(t_arg *arg);
 #endif
