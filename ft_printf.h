@@ -18,7 +18,7 @@ typedef struct	s_arg
 
 int		isthere(char input, char *set);
 char	*strcreator(const char *input, char *set);
-void	print_all(const char *input, va_list *arguments, t_arg *arg);
+int		print_all(const char *input, va_list *arguments, t_arg *arg);
 void	print_string(va_list *arguments, t_arg *arg);
 void	handle_width(int len, char c);
 void	print_numbers(va_list *arguments, t_arg *arg);
@@ -29,4 +29,6 @@ void	print_char(va_list *arguments, t_arg *arg);
 void	putnbr_base(long unsigned number, char *base);
 void	print_esanum(va_list *arguments, t_arg *arg);
 void	free_arg(t_arg *arg);
+int		ft_printf(const char *input, ...);
+
 #endif

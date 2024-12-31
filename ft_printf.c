@@ -48,8 +48,11 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	print_all(input, arguments, arg);
 }
 
-void	print_all(const char *input, va_list *arguments, t_arg *arg)
+int	print_all(const char *input, va_list *arguments, t_arg *arg)
 {
+	int	printed_char;
+
+	printed_char = 0;
 	while (*input != '%' && *input)
 	{
 		write(1, input, 1);
@@ -60,7 +63,10 @@ void	print_all(const char *input, va_list *arguments, t_arg *arg)
 	{
 		input++;
 		input_analizer(input, arguments, arg);
+		printed_char = arg -> printed;
+		free_arg(arg);
 	}
+	return (printed_char);
 }
 
 int	ft_printf(const char *input, ...)
@@ -72,9 +78,8 @@ int	ft_printf(const char *input, ...)
 	arg = malloc(sizeof(t_arg));
 	va_start(arguments, input);
 	arg -> printed = 0;
-	print_all(input, &arguments, arg);
-	printed_char = arg -> printed;
-	free_arg (arg);
+	printed_char = print_all(input, &arguments, arg);
+	free (arg);
 	va_end(arguments);
 	return (printed_char);
 }
