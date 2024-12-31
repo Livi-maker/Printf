@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_analizer.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 16:55:06 by ldei-sva          #+#    #+#             */
+/*   Updated: 2024/12/31 16:55:08 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include "libft.h"
 
@@ -24,7 +36,7 @@ char	*strcreator(const char *input, char *set)
 	}
 	if (len != 0)
 		str = ft_substr(input, 0, len);
-	else 
+	else
 	{
 		str = malloc (sizeof(char));
 		*str = '\0';
@@ -43,8 +55,8 @@ void	handle_width(int len, char c)
 
 int	numlen(long long number, char *c, int d)
 {
-	int	len;
-	long long n;
+	int			len;
+	long long	n;
 
 	len = 0;
 	n = number;

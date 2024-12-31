@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorterfunctions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
+/*   Updated: 2024/12/31 16:58:41 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include "libft.h"
 
@@ -6,13 +18,13 @@ void	print_string(va_list *arguments, t_arg *arg)
 	char	*str;
 	int		len;
 	char	*precision;
-	int 	i;
+	int		i;
 
 	precision = arg -> precision;
 	str = va_arg(*arguments, char *);
 	if (precision)
 		len = findmaxmin((ft_atoi(precision)), ft_strlen(str), 'm');
-	else 
+	else
 		len = ft_strlen(str);
 	i = ft_atoi(arg -> width) - len;
 	arg -> printed += findmaxmin(len, i + len, 'M');
@@ -24,7 +36,7 @@ void	print_string(va_list *arguments, t_arg *arg)
 		handle_width(i, ' ');
 }
 
-void print_numbers(va_list *arguments, t_arg *arg)
+void	print_numbers(va_list *arguments, t_arg *arg)
 {
 	int				number;
 	int				len;
@@ -77,17 +89,17 @@ void	print_char(va_list *arguments, t_arg *arg)
 		handle_width(i, ' ');
 }
 
-void print_esanum(va_list *arguments, t_arg *arg)
+void	print_esanum(va_list *arguments, t_arg *arg)
 {
-	long unsigned 			number;
+	long unsigned		number;
 	int					len;
 	char				*precision;
- 
+
 	number = va_arg(*arguments, long unsigned);
- 	precision = arg -> precision;
+	precision = arg -> precision;
 	len = numlen(number, arg -> c, 16);
 	if (precision)
- 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c , 16), 'M');
+		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 16), 'M');
 	if ((isthere('#', arg -> flags) == 1 || *(arg -> c) == 'p') && number != 0)
 		len += 2;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');

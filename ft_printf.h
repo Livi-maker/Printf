@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 16:54:12 by ldei-sva          #+#    #+#             */
+/*   Updated: 2024/12/31 16:54:14 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -7,15 +19,14 @@
 # include <stdlib.h>
 # include <stdarg.h>
 
-typedef struct	s_arg
+typedef struct s_arg
 {
 	char	*flags;
 	char	*width;
 	char	*precision;
 	char	*c;
 	int		printed;
-	void	*next;
-} t_arg;
+}	t_arg;
 
 int		isthere(char input, char *set);
 char	*strcreator(const char *input, char *set);
@@ -29,7 +40,7 @@ void	printunsigned(unsigned int number);
 void	print_char(va_list *arguments, t_arg *arg);
 void	putnbr_base(long unsigned number, char *base);
 void	print_esanum(va_list *arguments, t_arg *arg);
-void	free_arg(t_arg *arg);
+t_arg	*free_arg(t_arg *arg);
 int		ft_printf(const char *input, ...);
 
 #endif

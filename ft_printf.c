@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
+/*   Updated: 2024/12/31 16:53:16 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include "libft.h"
 
@@ -27,7 +39,6 @@ void	sorter(va_list *arguments, t_arg *arg)
 void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 {
 	int		len;
-	t_arg	*temp;
 
 	arg -> flags = strcreator(input, "-+ #0");
 	len = ft_strlen(arg -> flags);
@@ -49,9 +60,7 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	}
 	input += len + ft_strlen(arg -> c);
 	sorter(arguments, arg);
-	temp = arg;
-	arg = malloc(sizeof(t_arg));
-	free_arg(temp);
+	arg = free_arg(arg);
 	print_all(input, arguments, arg);
 }
 
