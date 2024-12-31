@@ -10,7 +10,10 @@ void	print_string(va_list *arguments, t_arg *arg)
 
 	precision = arg -> precision;
 	str = va_arg(*arguments, char *);
-	len = findmaxmin((ft_atoi(precision)), ft_strlen(str), 'm');
+	if (precision)
+		len = findmaxmin((ft_atoi(precision)), ft_strlen(str), 'm');
+	else 
+		len = ft_strlen(str);
 	i = ft_atoi(arg -> width) - len;
 	arg -> printed += findmaxmin(len, i + len, 'M');
 	if (isthere('-', arg -> flags) == 0)
@@ -57,7 +60,10 @@ void	print_char(va_list *arguments, t_arg *arg)
 	int		len;
 
 	c = va_arg(*arguments, int);
-	len = findmaxmin(ft_atoi(arg -> precision), 1, 'm');
+	if (arg -> precision)
+		len = findmaxmin(ft_atoi(arg -> precision), 1, 'm');
+	else
+		len = 1;
 	i = ft_atoi(arg -> width) - len;
 	arg -> printed += findmaxmin(len, i + len, 'M');
 	if (isthere('-', arg -> flags) == 0)

@@ -33,9 +33,12 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	arg -> width = strcreator(input + len, "*1234567890");
 	len += ft_strlen(arg -> width);
 	if (*(input + len) == '.')
+	{
 		len++;
-	arg -> precision = strcreator(input + len, "-*1234567890");
-	len += ft_strlen(arg -> precision);
+		arg -> precision = strcreator(input + len, "-*1234567890");
+	}
+	if (arg -> precision)
+		len += ft_strlen(arg -> precision);
 	arg -> c = strcreator(input + len, "cspdiuxX");
 	if (*(arg -> c) == '\0')
 	{
@@ -45,6 +48,7 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	}
 	input += len + ft_strlen(arg -> c);
 	sorter(arguments, arg);
+	free_arg (arg);
 	print_all(input, arguments, arg);
 }
 
@@ -64,7 +68,6 @@ int	print_all(const char *input, va_list *arguments, t_arg *arg)
 		input++;
 		input_analizer(input, arguments, arg);
 		printed_char = arg -> printed;
-		free_arg(arg);
 	}
 	return (printed_char);
 }
@@ -89,8 +92,8 @@ int	ft_printf(const char *input, ...)
 	int	i;
 	int n;
 
-	n = printf("orig :%12x.\n",42);
-	i = ft_printf("test :%12x.\n",42);
+	n = printf("orig :%c %c.\n",'0', 'l');
+	i = ft_printf("test :%c %c.\n",'0', 'l');
 	printf("toprint :%d\n", n);
 	printf("printed :%d", i);
 }*/
