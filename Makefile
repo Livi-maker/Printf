@@ -1,4 +1,4 @@
-NAME = printf.a
+NAME = libftprintf.a
 
 MY_SOURCES = $(wildcard *.c) $(wildcard libft/*.c)
 
@@ -16,6 +16,8 @@ $(NAME): $(MY_OBJECTS)
 
 %.o: %.c
 	$(CC) $(CGFLAGS) -c $< -o $@
+
+bonus: $(NAME)
 
 clean: 
 	rm -f $(MY_OBJECTS)

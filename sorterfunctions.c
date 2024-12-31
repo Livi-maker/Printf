@@ -33,7 +33,7 @@ void print_numbers(va_list *arguments, t_arg *arg)
 	number = va_arg(*arguments, int);
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 10);
-	if (precion)
+	if (precision)
 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
 	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && number > 0 && *(arg -> c) != 'u')
 		len ++;

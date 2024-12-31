@@ -27,6 +27,7 @@ void	sorter(va_list *arguments, t_arg *arg)
 void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 {
 	int		len;
+	t_arg	*temp;
 
 	arg -> flags = strcreator(input, "-+ #0");
 	len = ft_strlen(arg -> flags);
@@ -48,11 +49,13 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	}
 	input += len + ft_strlen(arg -> c);
 	sorter(arguments, arg);
-	free_arg (arg);
+	temp = arg;
+	arg = malloc(sizeof(t_arg);
+	free_arg(temp);
 	print_all(input, arguments, arg);
 }
 
-int	print_all(const char *input, va_list *arguments, t_arg *arg)
+void	print_all(const char *input, va_list *arguments, t_arg *arg)
 {
 	int	printed_char;
 
@@ -67,9 +70,7 @@ int	print_all(const char *input, va_list *arguments, t_arg *arg)
 	{
 		input++;
 		input_analizer(input, arguments, arg);
-		printed_char = arg -> printed;
 	}
-	return (printed_char);
 }
 
 int	ft_printf(const char *input, ...)
@@ -78,10 +79,11 @@ int	ft_printf(const char *input, ...)
 	t_arg	*arg;
 	int		printed_char;
 
-	arg = malloc(sizeof(t_arg));
+	arg = malloc(sizeof(t_arg);
 	va_start(arguments, input);
 	arg -> printed = 0;
-	printed_char = print_all(input, &arguments, arg);
+	print_all(input, &arguments, arg);
+	printed_char = arg -> printed
 	free (arg);
 	va_end(arguments);
 	return (printed_char);

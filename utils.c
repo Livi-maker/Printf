@@ -27,4 +27,5 @@ void	free_arg(t_arg *arg)
 	free (arg -> flags);
 	free (arg -> precision);
 	free (arg -> width);
+	free (arg);
 }

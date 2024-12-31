@@ -14,6 +14,7 @@ typedef struct	s_arg
 	char	*precision;
 	char	*c;
 	int		printed;
+	void	*next;
 } t_arg;
 
 int		isthere(char input, char *set);
