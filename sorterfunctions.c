@@ -32,11 +32,13 @@ void print_numbers(va_list *arguments, t_arg *arg)
 
 	number = va_arg(*arguments, int);
 	precision = arg -> precision;
-	len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
+	len = numlen(number, arg -> c, 10);
+	if (precion)
+		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
 	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && number > 0 && *(arg -> c) != 'u')
 		len ++;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
-	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(*precision))
+	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(precision))
 		handle_width(ft_atoi(arg -> width) - len, '0');
 	else if (isthere('-', arg -> flags) == 0)
 		handle_width(ft_atoi(arg -> width) - len, ' ');
@@ -44,7 +46,8 @@ void print_numbers(va_list *arguments, t_arg *arg)
 		write(1, "+", 1);
 	else if (isthere(' ', arg -> flags) == 1)
 		write(1, " ", 1);
-	handle_width(ft_atoi(precision) - numlen(number, arg -> c, 10), '0');
+	if (precision)
+		handle_width(ft_atoi(precision) - numlen(number, arg -> c, 10), '0');
 	if (*(arg -> c) == 'u')
 		printunsigned(number);
 	else
@@ -82,17 +85,20 @@ void print_esanum(va_list *arguments, t_arg *arg)
  
 	number = va_arg(*arguments, long unsigned);
  	precision = arg -> precision;
- 	len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c , 16), 'M');
+	len = numlen(number, arg -> c, 16);
+	if (precision)
+ 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c , 16), 'M');
 	if ((isthere('#', arg -> flags) == 1 || *(arg -> c) == 'p') && number != 0)
 		len += 2;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
-	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(*precision))
+	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(precision))
 		handle_width(ft_atoi(arg -> width) - len, '0');
 	else if (isthere('-', arg -> flags) == 0)
 		handle_width(ft_atoi(arg -> width) - len, ' ');
 	if ((isthere('#', arg -> flags) == 1 && number != 0) || *(arg -> c) == 'p')
 		write (1, "0x", 2);
-	handle_width(ft_atoi(precision) - numlen(number, arg -> c, 16), '0');
+	if (precision)
+		handle_width(ft_atoi(precision) - numlen(number, arg -> c, 16), '0');
 	if (*(arg -> c) == 'x' || *(arg -> c) == 'p')
 		putnbr_base(number, "0123456789abcdef");
 	else
