@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 13:25:53 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 13:41:03 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	ft_printf(const char *input, ...)
 	int	i;
 	int n;
 
-	n = printf("orig :%c %c.\n",'0', 'l');
-	i = ft_printf("test :%c %c.\n",'0', 'l');
+	n = printf("orig :%#.x.\n",0);
+	i = ft_printf("test :%#.x.\n", 0);
 	printf("toprint :%d\n", n);
 	printf("printed :%d", i);
 }*/
