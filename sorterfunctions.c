@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 14:09:37 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:10:07 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	print_string(va_list *arguments, t_arg *arg)
 
 	precision = arg -> precision;
 	str = va_arg(*arguments, char *);
+	if (!str)
+	{
+		write (1, "(null)", 6);
+		arg -> printed += 6;
+		return ;
+	}
 	if (precision)
 		len = findmaxmin((ft_atoi(precision)), ft_strlen(str), 'm');
 	else
@@ -38,25 +44,25 @@ void	print_string(va_list *arguments, t_arg *arg)
 
 void	print_numbers(va_list *arguments, t_arg *arg)
 {
-	long long		number;
+	long unsigned		number;
 	int				len;
 	char			*precision;
 
-	number = va_arg(*arguments, long long);
+	number = va_arg(*arguments, long unsigned);
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 10);
 	if (precision && ft_atoi(precision) == 0 && number == 0)
 		return ;
 	if (precision)
 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
-	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && number > 0 && *(arg -> c) != 'u')
+	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && (int)number > 0 && *(arg -> c) != 'u')
 		len ++;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
 	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(precision))
 		handle_width(ft_atoi(arg -> width) - len, '0');
 	else if (isthere('-', arg -> flags) == 0)
 		handle_width(ft_atoi(arg -> width) - len, ' ');
-	if (isthere('+', arg -> flags) == 1 && number > 0 && *(arg -> c) != 'u')
+	if (isthere('+', arg -> flags) == 1 && (int)number > 0 && *(arg -> c) != 'u')
 		write(1, "+", 1);
 	else if (isthere(' ', arg -> flags) == 1)
 		write(1, " ", 1);

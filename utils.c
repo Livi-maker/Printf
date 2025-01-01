@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:50 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 13:23:27 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 14:49:15 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	free_arg(t_arg *arg)
 
 t_arg	*createlist(t_arg *arg)
 {
-	arg = malloc(sizeof(t_arg));
 	arg -> c = NULL;
 	arg -> flags = NULL;
 	arg -> precision = NULL;

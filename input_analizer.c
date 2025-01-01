@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 13:36:43 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 14:56:14 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	numlen(long long number, char *c, int d)
 
 	len = 0;
 	n = number;
-	if (*c == 'u' || *c == 'x' || *c == 'X' || *c == 'p')
-		n = (unsigned long) number;
+	if (*c == 'd' || *c == 'i')
+		n = (int) number;
 	if (n <= 0)
 	{
 		len++;
