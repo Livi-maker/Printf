@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 14:49:01 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:53:01 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	sorter(va_list *arguments, t_arg *arg)
 	if (specifier == '%')
 	{
 		write(1, "%", 1);
+		arg -> printed += 1;
 	}
 }
 
@@ -51,7 +52,7 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	}
 	if (arg -> precision)
 		len += ft_strlen(arg -> precision);
-	arg -> c = strcreator(input + len, "cspdiuxX");
+	arg -> c = strcreator(input + len, "%cspdiuxX");
 	if (*(arg -> c) == '\0')
 	{
 		ft_putstr_fd((char *)(input - 1), 1);
@@ -100,8 +101,8 @@ int	ft_printf(const char *input, ...)
 	int	i;
 	int n;
 
-	n = printf("orig :%#.x.\n",0);
-	i = ft_printf("test :%#.x.\n", 0);
+	n = printf("orig : %% %%.\n", -ULONG_MAX);
+	i = ft_printf("test : %% %%.\n", -ULONG_MAX);
 	printf("toprint :%d\n", n);
 	printf("printed :%d", i);
 }*/

@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 15:10:07 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:48:59 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	print_string(va_list *arguments, t_arg *arg)
 
 void	print_numbers(va_list *arguments, t_arg *arg)
 {
-	long unsigned		number;
+	long long		number;
 	int				len;
 	char			*precision;
 
-	number = va_arg(*arguments, long unsigned);
+	number = va_arg(*arguments, long long);
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 10);
 	if (precision && ft_atoi(precision) == 0 && number == 0)
@@ -99,11 +99,17 @@ void	print_char(va_list *arguments, t_arg *arg)
 
 void	print_esanum(va_list *arguments, t_arg *arg)
 {
-	long unsigned		number;
+	long long			number;
 	int					len;
 	char				*precision;
 
-	number = va_arg(*arguments, long unsigned);
+	number = va_arg(*arguments, long long);
+	if (number == 0 && *(arg -> c) == 'p')
+	{
+		write(1, "(nil)", 5);
+		arg -> printed += 5;
+		return ;
+	}
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 16);
 	if (precision && ft_atoi(precision) == 0 && number == 0)
