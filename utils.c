@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:50 by ldei-sva          #+#    #+#             */
-/*   Updated: 2024/12/31 16:55:53 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 13:23:27 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,25 @@ void	putnbr_base(long unsigned number, char *base)
 	ft_putchar_fd(c, 1);
 }
 
-t_arg	*free_arg(t_arg *arg)
+void	free_arg(t_arg *arg)
 {
 	free (arg -> c);
+	arg -> c = NULL;
 	free (arg -> flags);
+	arg -> flags = NULL;
 	free (arg -> precision);
+	arg -> precision = NULL;
 	free (arg -> width);
-	free (arg);
+	arg -> width = NULL;
+}
+
+t_arg	*createlist(t_arg *arg)
+{
 	arg = malloc(sizeof(t_arg));
+	arg -> c = NULL;
+	arg -> flags = NULL;
+	arg -> precision = NULL;
+	arg -> width = NULL;
+	arg -> printed = 0;
 	return (arg);
 }

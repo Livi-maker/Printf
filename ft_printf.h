@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:54:12 by ldei-sva          #+#    #+#             */
-/*   Updated: 2024/12/31 16:54:14 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 13:24:17 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	printunsigned(unsigned int number);
 void	print_char(va_list *arguments, t_arg *arg);
 void	putnbr_base(long unsigned number, char *base);
 void	print_esanum(va_list *arguments, t_arg *arg);
-t_arg	*free_arg(t_arg *arg);
+void	free_arg(t_arg *arg);
 int		ft_printf(const char *input, ...);
+t_arg	*createlist(t_arg *arg);
 
 #endif

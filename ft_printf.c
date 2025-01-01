@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2024/12/31 16:53:16 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 13:25:53 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	}
 	input += len + ft_strlen(arg -> c);
 	sorter(arguments, arg);
-	arg = free_arg(arg);
+	free_arg(arg);
 	print_all(input, arguments, arg);
 }
 
@@ -87,7 +87,7 @@ int	ft_printf(const char *input, ...)
 
 	arg = malloc(sizeof(t_arg));
 	va_start(arguments, input);
-	arg -> printed = 0;
+	arg = createlist(arg);
 	print_all(input, &arguments, arg);
 	printed_char = arg -> printed;
 	free (arg);
