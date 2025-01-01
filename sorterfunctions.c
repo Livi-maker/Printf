@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 13:40:10 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 14:09:37 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	print_string(va_list *arguments, t_arg *arg)
 
 void	print_numbers(va_list *arguments, t_arg *arg)
 {
-	int				number;
+	long long		number;
 	int				len;
 	char			*precision;
 
-	number = va_arg(*arguments, int);
+	number = va_arg(*arguments, long long);
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 10);
-	if (ft_atoi(precision) == 0 && number == 0)
+	if (precision && ft_atoi(precision) == 0 && number == 0)
 		return ;
 	if (precision)
 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
@@ -100,7 +100,7 @@ void	print_esanum(va_list *arguments, t_arg *arg)
 	number = va_arg(*arguments, long unsigned);
 	precision = arg -> precision;
 	len = numlen(number, arg -> c, 16);
-	if (ft_atoi(precision) == 0 && number == 0)
+	if (precision && ft_atoi(precision) == 0 && number == 0)
 		return ;
 	if (precision)
 		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 16), 'M');
