@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 15:48:59 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:36:03 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ void	print_string(va_list *arguments, t_arg *arg)
 	precision = arg -> precision;
 	str = va_arg(*arguments, char *);
 	if (!str)
-	{
-		write (1, "(null)", 6);
-		arg -> printed += 6;
-		return ;
-	}
+		str = "(null)";
 	if (precision)
 		len = findmaxmin((ft_atoi(precision)), ft_strlen(str), 'm');
 	else

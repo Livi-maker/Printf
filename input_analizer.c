@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 14:56:14 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:37:44 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ void	handle_width(int len, char c)
 
 int	numlen(long long number, char *c, int d)
 {
-	int			len;
-	long long	n;
+	int					len;
+	unsigned long long	n;
 
 	len = 0;
 	n = number;
 	if (*c == 'd' || *c == 'i')
 		n = (int) number;
+	else
+		n = (unsigned long long) number;
 	if (n <= 0)
 	{
 		len++;

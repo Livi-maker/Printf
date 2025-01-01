@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 15:53:01 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:38:48 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 	{
 		len++;
 		arg -> precision = strcreator(input + len, "-*1234567890");
-	}
-	if (arg -> precision)
 		len += ft_strlen(arg -> precision);
+	}
 	arg -> c = strcreator(input + len, "%cspdiuxX");
 	if (*(arg -> c) == '\0')
 	{
@@ -59,7 +58,7 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 		arg -> printed += ft_strlen(input - 1);
 		return ;
 	}
-	input += len + ft_strlen(arg -> c);
+	input += len + 1;
 	sorter(arguments, arg);
 	free_arg(arg);
 	print_all(input, arguments, arg);
@@ -101,8 +100,8 @@ int	ft_printf(const char *input, ...)
 	int	i;
 	int n;
 
-	n = printf("orig : %% %%.\n", -ULONG_MAX);
-	i = ft_printf("test : %% %%.\n", -ULONG_MAX);
+	n = printf("orig : %p.\n", ULONG_MAX);
+	i = ft_printf("test : %p.\n", ULONG_MAX);
 	printf("toprint :%d\n", n);
 	printf("printed :%d", i);
 }*/
