@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:50 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 14:49:15 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:32:04 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,24 @@ t_arg	*createlist(t_arg *arg)
 	arg -> width = NULL;
 	arg -> printed = 0;
 	return (arg);
+}
+
+int	numlen2(long long number, int d)
+{
+	unsigned long long	n;
+	int 				len;
+
+	len = 0;
+	n = number;
+	if (n <= 0)
+	{
+		len++;
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		len++;
+		n /= d;
+	}
+	return (len);
 }

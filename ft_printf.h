@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:54:12 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 17:33:09 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:17:57 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	print_string(va_list *arguments, t_arg *arg);
 void	handle_width(int len, char c);
 void	print_numbers(va_list *arguments, t_arg *arg);
 int		numlen(long long number, char *c, int d);
+int		numlen2(long long number, int d);
 int		findmaxmin(int i1, int i2, char indicator);
 void	printunsigned(unsigned int number);
 void	print_char(va_list *arguments, t_arg *arg);

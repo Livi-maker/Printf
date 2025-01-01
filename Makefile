@@ -6,13 +6,13 @@ MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CC = gcc
 
-CGFLAGS += -Wall -Wextra -Werror
+#CGFLAGS += -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(MY_OBJECTS)
-	#$(CC) $(CGFLAGS) -o $@ $^
-	ar rcs $(NAME) $(MY_OBJECTS)
+	$(CC) $(CGFLAGS) -o $@ $^
+	#ar rcs $(NAME) $(MY_OBJECTS)
 
 %.o: %.c
 	$(CC) $(CGFLAGS) -c $< -o $@
