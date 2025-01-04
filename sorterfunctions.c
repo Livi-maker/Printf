@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 18:18:22 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/04 14:27:29 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,30 @@ void	print_string(va_list *arguments, t_arg *arg)
 		handle_width(i, ' ');
 }
 
-void	print_numbers(va_list *arguments, t_arg *arg)
+void	print_numbers(va_list *arguments, t_arg *arg, va_list *copy)
 {
-	long long		number;
-	int				len;
-	char			*precision;
+	long long	number;
+	int			len;
+	int			numlen;
+	char		*precision;
 
-	number = va_arg(*arguments, long long);
 	precision = arg -> precision;
-	len = numlen(number, arg -> c, 10);
-	if (precision && ft_atoi(precision) == 0 && number == 0)
+	len = lookforlen(copy, arg -> c);
+	numlen = len;
+	number = va_arg(*arguments, long long);
+	if (precision && ft_atoi(precision) == 0 && (int)number == 0)
 		return ;
 	if (precision)
-		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 10), 'M');
-	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && (int)number > 0 && *(arg -> c) != 'u')
+		len = findmaxmin(ft_atoi(precision), numlen, 'M');
+	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && (int)number >= 0 && *(arg -> c) != 'u')
 		len ++;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
-	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(precision))
-		handle_width(ft_atoi(arg -> width) - len, '0');
-	else if (isthere('-', arg -> flags) == 0)
-		handle_width(ft_atoi(arg -> width) - len, ' ');
-	if (isthere('+', arg -> flags) == 1 && (int)number > 0 && *(arg -> c) != 'u')
-		write(1, "+", 1);
-	else if (isthere(' ', arg -> flags) == 1)
-		write(1, " ", 1);
-	if (precision)
-		handle_width(ft_atoi(precision) - numlen(number, arg -> c, 10), '0');
-	if (*(arg -> c) == 'u')
-		printunsigned(number);
-	else
-		ft_putnbr_fd(number, 1);
-	if (isthere('-', arg -> flags) == 1)
-		handle_width(ft_atoi(arg -> width) - len, ' ');
+	if ((int)number == -2147483648 && *(arg -> c) != 'u')
+	{
+		handle_minint(arg, len);
+		return ;
+	}
+	handle_flags_num(number, arg, len, numlen);
 }
 
 void	print_char(va_list *arguments, t_arg *arg)
@@ -93,12 +85,17 @@ void	print_char(va_list *arguments, t_arg *arg)
 		handle_width(i, ' ');
 }
 
-void	print_esanum(va_list *arguments, t_arg *arg)
+void	print_esanum(va_list *arguments, t_arg *arg, va_list *copy)
 {
 	long long			number;
 	int					len;
+	int					numlen;
 	char				*precision;
 
+	precision = NULL;
+	precision = arg -> precision;
+	len = lookforlen(copy, arg -> c);
+	numlen = len;
 	number = va_arg(*arguments, long long);
 	if (number == 0 && *(arg -> c) == 'p')
 	{
@@ -106,27 +103,12 @@ void	print_esanum(va_list *arguments, t_arg *arg)
 		arg -> printed += 5;
 		return ;
 	}
-	precision = arg -> precision;
-	len = numlen(number, arg -> c, 16);
 	if (precision && ft_atoi(precision) == 0 && number == 0)
 		return ;
 	if (precision)
-		len = findmaxmin(ft_atoi(precision), numlen(number, arg -> c, 16), 'M');
-	if ((isthere('#', arg -> flags) == 1 || *(arg -> c) == 'p') && number != 0)
+		len = findmaxmin(ft_atoi(precision), len, 'M');
+	if ((isthere('#', arg -> flags) == 1 && (unsigned int)number != 0) || *(arg -> c) == 'p')
 		len += 2;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
-	if (isthere('0', arg -> flags) == 1 && isthere('-', arg -> flags) == 0 && !(precision))
-		handle_width(ft_atoi(arg -> width) - len, '0');
-	else if (isthere('-', arg -> flags) == 0)
-		handle_width(ft_atoi(arg -> width) - len, ' ');
-	if ((isthere('#', arg -> flags) == 1 && number != 0) || *(arg -> c) == 'p')
-		write (1, "0x", 2);
-	if (precision)
-		handle_width(ft_atoi(precision) - numlen(number, arg -> c, 16), '0');
-	if (*(arg -> c) == 'x' || *(arg -> c) == 'p')
-		putnbr_base(number, "0123456789abcdef");
-	else
-		putnbr_base(number, "0123456789ABCDEF");
-	if (isthere('-', arg -> flags) == 1)
-		handle_width(ft_atoi(arg -> width) - len, ' ');
+	handle_flags_num(number, arg, len, numlen);
 }

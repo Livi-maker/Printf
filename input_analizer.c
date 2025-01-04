@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/01 18:34:24 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/04 11:36:40 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,45 +53,54 @@ void	handle_width(int len, char c)
 	}
 }
 
-int	numlen(long long number, char *c, int d)
+void	handle_flags_num(long long number, t_arg *arg, int len, int numlen)
 {
-	int			len;
-	int			n;
-
-	len = 0;
-	if (*c == 'u' || *c == 'x' || *c == 'X' || *c == 'p')
+	if (isthere('-', arg -> flags) == 0 && isthere('0', arg -> flags) == 0)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
+	if (isthere('+', arg -> flags) == 1 && (*arg -> c == 'd' || *arg -> c == 'i') && (int)number >= 0)
+		write(1, "+", 1);
+	else if (isthere(' ', arg -> flags) == 1 && (*arg -> c == 'i' || *arg -> c == 'd' || *arg -> c == 'u') && (int)number >= 0)
+		write(1, " ", 1);
+	if ((isthere('#', arg -> flags) == 1 || *arg -> c == 'p'))
 	{
-		len = numlen2(number, d);
-		return (len);
+		if ((*arg -> c == 'x' && (unsigned int)number != 0) || *arg -> c == 'p')
+			write (1, "0x", 2);
+		if (*arg -> c == 'X' && (unsigned int)number != 0)
+			write (1, "0X", 2);
 	}
-	n = (int) number;
-	if (n == -2147483648)
-		return (11);
-	if (n <= 0)
+	if (isthere('-', arg -> flags) == 0 && isthere('0', arg -> flags) == 1 && !(arg -> precision))
 	{
-		len++;
-		n *= -1;
+		if ((int)number < 0 && ((*arg -> c == 'd') || (*arg -> c == 'i')))
+		{
+			write (1, "-", 1);
+			number *= -1;
+		}
+		handle_width(ft_atoi(arg -> width) - len, '0');
 	}
-	while (n > 0)
-	{
-		len++;
-		n /= d;
-	}
-	return (len);
+	else if (isthere('-', arg -> flags) == 0)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
+	ft_putnbr(number, arg -> c, arg, numlen);
+	if (isthere('-', arg -> flags) == 1)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
 }
 
-int	findmaxmin(int i1, int i2, char indicator)
+void	handle_minint(t_arg *arg, int len)
 {
-	if (indicator == 'm')
-	{
-		if (i1 < i2)
-			return (i1);
-		return (i2);
-	}
-	if (indicator == 'M')
-	{
-		if (i1 > i2)
-			return (i1);
-	}
-	return (i2);
+	char	*flags;
+	char	*precision;
+
+	flags = arg -> flags;
+	precision = arg -> precision;
+	if (isthere('-', flags) == 0 && isthere('0', flags) == 0)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
+	write(1, "-", 1);
+	if (isthere('-', flags) == 0)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
+	if (isthere('-', flags) == 0 && isthere('0', flags) == 1 && !(precision))
+		handle_width(ft_atoi(arg -> width) - len, '0');
+	if (arg -> precision)
+		handle_width(ft_atoi(precision) - 11, '0');
+	write(1, "2147483648", 10);
+	if (isthere('-', arg -> flags) == 1)
+		handle_width(ft_atoi(arg -> width) - len, ' ');
 }
