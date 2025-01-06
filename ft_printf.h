@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:54:12 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/04 14:32:23 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:23:14 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int		ft_printf(const char *input, ...);
 void	createlist(t_arg *arg);
 void	handle_flags_num(long long number, t_arg *arg, int len, int numlen);
 void	handle_minint(t_arg *arg, int len);
+void	add_esanum_flags(long long number, t_arg *arg);
+void	add_decimal_flags(long long number, t_arg *arg);
 
 #endif
