@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:55:50 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/06 20:10:13 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:22:33 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	createlist(t_arg *arg)
 	arg -> printed = 0;
 }
 
-int findmaxmin(int i1, int i2, char indicator)
+int	findmaxmin(int i1, int i2, char indicator)
 {
 	if (indicator == 'm')
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 22:20:58 by ldei-sva          #+#    #+#             */
+/*   Updated: 2025/01/06 22:33:47 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 
@@ -30,12 +42,12 @@ void	putnbrbase_unsigned(unsigned int number, char *c, int d)
 	char	*base;
 	char	toprint;
 
-	if	(*c == 'X')
+	if (*c == 'X')
 		base = "0123456789ABCDEF";
 	else
 		base = "0123456789abcdef";
 	toprint = base[number % d];
-	if (number >= d)
+	if (number >= (unsigned int)d)
 		putnbrbase_unsigned(number / d, c, d);
 	write(1, &toprint, 1);
 }
@@ -43,7 +55,7 @@ void	putnbrbase_unsigned(unsigned int number, char *c, int d)
 void	putnbrbase_long(unsigned long number)
 {
 	char	*base;
-	
+
 	base = "0123456789abcdef";
 	if (number == 0)
 	{

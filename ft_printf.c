@@ -6,28 +6,30 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/05 13:35:26 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:32:55 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-void	sorter(va_list *arguments, t_arg *arg, va_list *copy)
+void	sorter(va_list *arguments, t_arg *arg)
 {
 	char	specifier;
+	va_list	copy;
 
+	va_copy(copy, *arguments);
 	specifier = *(arg -> c);
 	if (specifier == 's')
 		print_string(arguments, arg);
 	if (specifier == 'd' || specifier == 'i')
-		print_numbers(arguments, arg, copy);
+		print_numbers(arguments, arg, &copy);
 	if (specifier == 'u')
-		print_numbers(arguments, arg, copy);
+		print_numbers(arguments, arg, &copy);
 	if (specifier == 'x' || specifier == 'X')
-		print_esanum(arguments, arg, copy);
+		print_esanum(arguments, arg, &copy);
 	if (specifier == 'p')
-		print_esanum(arguments, arg, copy);
+		print_esanum(arguments, arg, &copy);
 	if (specifier == 'c')
 		print_char(arguments, arg);
 	if (specifier == '%')
@@ -35,9 +37,10 @@ void	sorter(va_list *arguments, t_arg *arg, va_list *copy)
 		write(1, "%", 1);
 		arg -> printed += 1;
 	}
+	va_end(copy);
 }
 
-void	input_analizer(const char *input, va_list *arguments, t_arg *arg, va_list *copy)
+void	input_analizer(const char *input, va_list *arguments, t_arg *arg)
 {
 	int		len;
 
@@ -59,12 +62,12 @@ void	input_analizer(const char *input, va_list *arguments, t_arg *arg, va_list *
 		return ;
 	}
 	input += len + 1;
-	sorter(arguments, arg, copy);
+	sorter(arguments, arg);
 	free_arg(arg);
-	print_all(input, arguments, arg, copy);
+	print_all(input, arguments, arg);
 }
 
-void	print_all(const char *input, va_list *arguments, t_arg *arg, va_list *copy)
+void	print_all(const char *input, va_list *arguments, t_arg *arg)
 {
 	while (*input != '%' && *input)
 	{
@@ -75,26 +78,23 @@ void	print_all(const char *input, va_list *arguments, t_arg *arg, va_list *copy)
 	if (*input == '%')
 	{
 		input++;
-		input_analizer(input, arguments, arg, copy);
+		input_analizer(input, arguments, arg);
 	}
 }
 
 int	ft_printf(const char *input, ...)
 {
 	va_list	arguments;
-	va_list	copy;
 	t_arg	*arg;
 	int		printed_char;
 
 	arg = malloc(sizeof(t_arg));
 	va_start(arguments, input);
-	va_copy(copy, arguments);
 	createlist(arg);
-	print_all(input, &arguments, arg, &copy);
+	print_all(input, &arguments, arg);
 	printed_char = arg -> printed;
 	free (arg);
 	va_end(arguments);
-	va_end(copy);
 	return (printed_char);
 }
 

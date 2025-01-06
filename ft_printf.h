@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:54:12 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/06 18:23:14 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:30:10 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_arg
 
 int		isthere(char input, char *set);
 char	*strcreator(const char *input, char *set);
-void	print_all(const char *input, va_list *arguments, t_arg *arg, va_list *copy);
+void	print_all(const char *input, va_list *arguments, t_arg *arg);
 void	print_string(va_list *arguments, t_arg *arg);
 void	handle_width(int len, char c);
 void	print_numbers(va_list *arguments, t_arg *arg, va_list *copy);

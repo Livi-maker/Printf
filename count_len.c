@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_len.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 22:15:26 by ldei-sva          #+#    #+#             */
+/*   Updated: 2025/01/06 22:16:02 by ldei-sva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 
@@ -20,7 +32,7 @@ int	countlenint(va_list *arguments)
 		len++;
 		number /= 10;
 	}
-	return len;
+	return (len);
 }
 
 int	countlenpointer(va_list *arguments)
@@ -37,7 +49,7 @@ int	countlenpointer(va_list *arguments)
 		len++;
 		number /= 16;
 	}
-	return len;
+	return (len);
 }
 
 int	countlenunsigned(va_list *arguments, int d)
@@ -75,4 +87,3 @@ int	lookforlen(va_list	*arguments, char *c)
 	}
 	return (len);
 }
-

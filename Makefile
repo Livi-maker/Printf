@@ -11,7 +11,6 @@ CGFLAGS += -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(MY_OBJECTS)
-	#$(CC) $(CGFLAGS) -o $@ $^
 	ar rcs $(NAME) $(MY_OBJECTS)
 
 %.o: %.c
