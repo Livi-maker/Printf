@@ -4,7 +4,7 @@ MY_SOURCES = $(wildcard *.c) $(wildcard libft/*.c)
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
-CC = gcc
+CC = cc
 
 CGFLAGS += -Wall -Wextra -Werror
 

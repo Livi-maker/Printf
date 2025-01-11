@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:51:06 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/06 22:32:55 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:03:59 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,3 @@ int	ft_printf(const char *input, ...)
 	va_end(arguments);
 	return (printed_char);
 }
-
-/*#include <limits.h>
-
-int main()
-{
-	int	i;
-	int n;
-
-	n = printf(" %x %x %x %x %x %x %x %x\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, INT_MIN, 0, ULONG_MAX);
-	i = ft_printf(" %x %x %x %x %x %x %x %x\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, INT_MIN, 0, ULONG_MAX);
-	printf("toprint :%d\n", n);
-	printf("printed :%d", i);
-}*/

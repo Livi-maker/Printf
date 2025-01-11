@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:56:42 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/06 22:34:38 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:08:07 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	print_numbers(va_list *arguments, t_arg *arg, va_list *copy)
 		len = 0;
 	else if (precision)
 		len = findmaxmin(ft_atoi(precision), numlen, 'M');
-	if ((isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1) && (int)number >= 0 && *(arg -> c) != 'u')
-		len ++;
+	if (isthere('+', arg -> flags) == 1 || isthere(' ', arg -> flags) == 1)
+		if ((int)number >= 0 && *(arg -> c) != 'u')
+			len ++;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
 	if ((int)number == -2147483648 && *(arg -> c) != 'u')
 	{
@@ -91,20 +92,23 @@ void	print_esanum(va_list *arguments, t_arg *arg, va_list *copy)
 	int					len;
 	int					numlen;
 	char				*precision;
-	char				*flags;
 
 	precision = arg -> precision;
-	flags = arg -> flags;
 	len = lookforlen(copy, arg -> c);
 	numlen = len;
 	number = va_arg(*arguments, long long);
 	if (precision && ft_atoi(precision) == 0 && number == 0)
 		len = 0;
-	else if (number == 0 && *arg -> c == 'p')
+	else if (*arg -> c == 'p' && number == 0)
 		len = 5;
 	else if (precision)
 		len = findmaxmin(ft_atoi(precision), len, 'M');
-	if ((isthere('#', flags) == 1 && (unsigned int)number != 0) || *(arg -> c) == 'p')
+	if (isthere('#', arg -> flags) == 1 && (unsigned int)number != 0)
+	{
+		if (*(arg -> c) != 'p')
+			len += 2;
+	}
+	else if (*arg -> c == 'p' && number != 0)
 		len += 2;
 	arg -> printed += findmaxmin(len, ft_atoi(arg -> width), 'M');
 	handle_flags_num(number, arg, len, numlen);

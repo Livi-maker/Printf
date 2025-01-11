@@ -6,7 +6,7 @@
 /*   By: ldei-sva <ldei-sva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 22:20:58 by ldei-sva          #+#    #+#             */
-/*   Updated: 2025/01/06 22:33:47 by ldei-sva         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:04:21 by ldei-sva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void	ft_putnbr(long long number, char *c, t_arg *arg, int numlen)
 {
-	if (*c == 'i' || *c == 'd')
+	if ((*c == 'i' || *c == 'd') && (int)number < 0 && arg -> precision)
 	{
-		if ((int)number < 0)
-		{
-			number *= -1;
-			write(1, "-", 1);
-		}
+		number *= -1;
+		write(1, "-", 1);
+		numlen--;
+		if (ft_atoi(arg -> precision) > numlen)
+			arg -> printed += 1;
 	}
 	if (arg -> precision && ft_atoi(arg -> precision) == 0 && number == 0)
 		return ;
